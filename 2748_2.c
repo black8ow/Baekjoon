@@ -1,20 +1,20 @@
 #include <stdio.h>
 
-int fibo(int num);
+long long fibo(int num);
 
-int first_fibo = 0;
-int second_fibo = 1;
+long long first_fibo = 0;
+long long second_fibo = 1;
 
-int sum = 0;
+long long sum = 0;
 
 int main(){
   int input;
   scanf("%d", &input);
-  printf("%d\n", fibo(input));
+  printf("%lld\n", fibo(input));
   return 0;
 }
 
-int fibo(int num){
+long long fibo(int num){
   
   if (num == 0) return first_fibo;
   if (num == 1) return second_fibo;
