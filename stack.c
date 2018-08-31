@@ -8,6 +8,7 @@ struct Node {
   int element;
   NodePtr next;
 }
+
 int size = 0;
 
 void Push(Stack, int);
@@ -34,33 +35,38 @@ int main() {
   for (i = input; i > 0; i--){
 
     scanf("%s", &command);
-    switch(command){
+    
+    if (command == "push"){
+      int push_num;
+      scanf("%d", &push_num);
+      Push(S, push_num);
+    }
 
-      case push :
-	int push_num;
-	scanf("%d", &push_num);
-	Push(S, push_num);
-        break;
+    else if (command == "pop"){
+      Pop(S);
+      break;
+    }
 
-      case pop :
-	Pop(S);
-        break;
+    else if (command == "size"){
+      PrintSize(S);
+      break;
+    }
 
-      case size :
-	PrintSize(S);
-        break;
+    else if (command == "empty"){ 
+      int result;
+      result = IsEmpty(S);
+      printf("%d\n", result);
+      break;
+    }   
+   
+    else if (command == "top"){
+      int top_num;
+      top_num = PrintTop(S);
+      printf("%d\n", top_num);
+      break; 
+    }
 
-      case empty : 
-	int result;
-	result = IsEmpty(S);
-	printf("%d\n", result);
-        break;
-
-      case top :
-	int top_num;
-	top_num = PrintTop(S);
-	printf("%d\n", top_num);
-        break; 
+    else printf("unknown input\n");
 
   }
 
@@ -79,7 +85,6 @@ void Push(Stack S, int new){
 
   if (new_cell == NULL){
     printf("do not have enough space\n");
-    return -1;
   }
 
   new_cell->element = new;
