@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 typedef struct Node *NodePtr;
 typedef NodePtr Stack;
@@ -7,7 +8,7 @@ typedef NodePtr Stack;
 struct Node {
   int element;
   NodePtr next;
-}
+};
 
 int size = 0;
 
@@ -28,14 +29,16 @@ int main() {
   }
   
   int input, i;
-  string command;
+  char* command;
 
   scanf("%d", &input);
   
   for (i = input; i > 0; i--){
 
     scanf("%s", &command);
-    
+   
+    printf("%s\n", command);
+ 
     if (command == "push"){
       int push_num;
       scanf("%d", &push_num);
