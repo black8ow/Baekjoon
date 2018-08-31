@@ -2,25 +2,28 @@
 #include <string.h>
 
 typedef struct Node *NodePtr;
+typedef NodePtr Stack;
 
 struct Node {
   int element;
   NodePtr next;
 }
+int size = 0;
 
-void Push(NodePtr, int);
-void Pop(NodePtr);
-void PrintSize(NodePtr);
-void IsEmpty(NodePtr);
-void PrintTop(NodePtr);
+void Push(Stack, int);
+void Pop(Stack);
+void PrintSize(Stack);
+int IsEmpty(Stack);
+int PrintTop(Stack);
+void MakeEmpty(Stack);
 
 int main() {
-  NodePtr S;
+  Stack S;
   S = malloc(sizeof(struct Node));
   S->next = NULL;
   if (S == NULL){
     printf("do not have enough space\n");
-    return 0;
+    return -1;
   }
   
   int input, i;
@@ -48,11 +51,15 @@ int main() {
         break;
 
       case empty : 
-	IsEmpty(S);
+	int result;
+	result = IsEmpty(S);
+	printf("%d\n", result);
         break;
 
       case top :
-	PrintTop(S);
+	int top_num;
+	top_num = PrintTop(S);
+	printf("%d\n", top_num);
         break; 
 
   }
@@ -60,4 +67,49 @@ int main() {
   MakeEmpty(S);
   return 0;
 }
+
+void MakeEmpty(Stack S){
+  while (!IsEmpty(S)) Pop(S);
+}
+
+void Push(Stack S, int new){
+
+  NodePtr new_cell;
+  new_cell = malloc(sizeof(struct Node));
+
+  if (new_cell == NULL){
+    printf("do not have enough space\n");
+    return -1;
+  }
+
+  new_cell->element = new;
+  new_cell->next = S->next;
+  S->next = new_cell;
+  size++;
+
+}
+
+void Pop(Stack S){
+  NodePtr rmv_cell;
+  rmv_cell = S->next;
+  S->next = S->next->next;
+  free(rmv_cell);
+  size--;
+}
+
+void PrintSize(Stack S){
+  printf("%d\n", size);
+}
+
+int IsEmpty(Stack S){
+  if (S->next == NULL) return 1;
+  return 0;
+}
+
+int PrintTop(Stack S){
+  if (!IsEmpty(S)) return S->next->element;
+  printf("empty stack\n");
+  return -1;
+}
+
 
