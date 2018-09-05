@@ -45,7 +45,12 @@ int main() {
 
     else if (!strcmp(command, "pop")){
       if (size == 0) printf("-1\n");
-      else Pop(S);
+      else {
+          int k;
+          k = PrintTop(S);
+          printf("%d\n", k);
+          Pop(S);
+      }
     }
 
     else if (!strcmp(command, "size")){
@@ -93,9 +98,6 @@ void Push(Stack S, int new){
 }
 
 void Pop(Stack S){
-  int k;
-  k = PrintTop(S);
-  printf("%d\n", k);
 
   NodePtr rmv_cell;
   rmv_cell = S->next;
@@ -115,7 +117,6 @@ int IsEmpty(Stack S){
 
 int PrintTop(Stack S){
   if (!IsEmpty(S)) return S->next->element;
-  printf("empty stack\n");
   return -1;
 }
 
