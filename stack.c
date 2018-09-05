@@ -29,7 +29,7 @@ int main() {
   }
   
   int input, i;
-  char* command;
+  char command[10];
 
   scanf("%d", &input);
   
@@ -37,36 +37,31 @@ int main() {
 
     scanf("%s", &command);
    
-    printf("%s\n", command);
- 
-    if (command == "push"){
+    if (!strcmp(command, "push")){
       int push_num;
       scanf("%d", &push_num);
       Push(S, push_num);
     }
 
-    else if (command == "pop"){
-      Pop(S);
-      break;
+    else if (!strcmp(command, "pop")){
+      if (size == 0) printf("-1\n");
+      else Pop(S);
     }
 
-    else if (command == "size"){
+    else if (!strcmp(command, "size")){
       PrintSize(S);
-      break;
     }
 
-    else if (command == "empty"){ 
+    else if (!strcmp(command, "empty")){ 
       int result;
       result = IsEmpty(S);
       printf("%d\n", result);
-      break;
     }   
    
-    else if (command == "top"){
+    else if (!strcmp(command, "top")){
       int top_num;
       top_num = PrintTop(S);
       printf("%d\n", top_num);
-      break; 
     }
 
     else printf("unknown input\n");
@@ -98,6 +93,10 @@ void Push(Stack S, int new){
 }
 
 void Pop(Stack S){
+  int k;
+  k = PrintTop(S);
+  printf("%d\n", k);
+
   NodePtr rmv_cell;
   rmv_cell = S->next;
   S->next = S->next->next;
